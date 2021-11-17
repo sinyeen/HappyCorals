@@ -2,6 +2,9 @@
 
 **Product Link:** [Happy Corals](https://www.happycoral.tk/)
 
+**Industry Experience Project award winner**
+![](https://github.com/sinyeen/HappyCorals/blob/main/Images/Capture.PNG)
+
 ## Project Overview
 Our reefs are facing a growing combination of threats such as climate change, water quality, coastal development, and tourism. A majority of Australia's children do not have sufficient information and awareness about the importance of the preservation of coral reefs. It can be a little dry and distant when kids learn about biomes and ecosystems in school. The main objective of our project is to create an educational website that is interactive and engaging to help children in Australia learn about coral reefs and things they can do on a daily basis to make a difference for the reefs.
 

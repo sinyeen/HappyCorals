@@ -1,0 +1,19 @@
+
+body {
+    color: #fff;
+}
+
+#highScoresList {
+    list-style: none;
+    margin-bottom: 4rem;
+}
+
+.high-score {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.finalScore {
+    color: 	rgb(255,215,0);
+}

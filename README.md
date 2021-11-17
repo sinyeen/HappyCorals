@@ -1,5 +1,7 @@
 # Happy Corals <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f422.png?v8" width="30px"> <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f3d6.png?v8" width="30px">
 
+**Product Link:** [Happy Corals](https://www.happycoral.tk/)
+
 ## Project Overview
 Our reefs are facing a growing combination of threats such as climate change, water quality, coastal development, and tourism. A majority of Australia's children do not have sufficient information and awareness about the importance of the preservation of coral reefs. It can be a little dry and distant when kids learn about biomes and ecosystems in school. The main objective of our project is to create an educational website that is interactive and engaging to help children in Australia learn about coral reefs and things they can do on a daily basis to make a difference for the reefs.
 

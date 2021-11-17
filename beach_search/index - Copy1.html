@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Places Search Box</title>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <!-- Popper JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="container-fluid map">
+        <div class="row">
+          <div class="col-md-12 text-center py-3" style="background-color:white;">
+            <h1 class="text-center">Search Beaches</h1>
+            <input id="pac-input" class="controls form-control" type="text" placeholder="Search ZipCode or Suburb">
+          </div>
+        </div>
+        <div class="row map">
+          <div class="col-md-12 p-0">
+            <div id="map"></div>
+          </div>
+        </div>
+        <div class="row map">
+          <div class="col-md-12 py-2" style="background-color:wite;">
+
+            <h3 id="info1" class="text-center"></h3>
+            <h3 id="info" class="text-center"></h3>
+            
+
+          </div>
+        </div>
+      </div>
+      <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMcDuuKl1U9RpconmSTTEFEFdDxN_8E_g&callback=initAutocomplete&libraries=places&v=weekly&channel=2" async></script>
+   </body>
+</html>
+<script type="text/javascript">
+   var searchBox, map, lat, lng,infowindow, geocoder,searchAutocomplete;
+   function initAutocomplete() {
+     map = new google.maps.Map(document.getElementById("map"), {
+       center: { lat: -16.35, lng: 145.9 },
+       zoom: 9,
+       mapTypeId: "roadmap",
+     });
+     infowindow = new google.maps.InfoWindow();
+     geocoder = new google.maps.Geocoder();
+     // Create the search box and link it to the UI element.
+      var options = {
+        componentRestrictions: {country: "aus"}
+      };
+
+    const search = document.getElementById('pac-input');
+    searchAutocomplete = new google.maps.places.Autocomplete( search, options );
+    // searchAutocomplete.setFields(['place_id']);
+    setupPlaceChangedListener(searchAutocomplete);
+
+   }
+   function setupPlaceChangedListener(autocomplete)
+   {
+    autocomplete.bindTo('bounds', map);
+    autocomplete.addListener('place_changed', () => {
+    const place = autocomplete.getPlace();
+        let markers = [];
+        const places = autocomplete.getPlace();
+        if (places.length == 0) {
+           return false;
+        }
+        markers.forEach((marker) => {
+          marker.setMap(null);
+        });
+        markers = [];
+        const bounds = new google.maps.LatLngBounds();
+        if (!place.geometry || !place.geometry.location) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+        if (place.geometry.viewport)
+        {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+        lat = place.geometry.location.lat();
+        lng = place.geometry.location.lng();
+        searchBeaches();
+        map.fitBounds(bounds);
+    });
+   };
+   function searchBeaches()
+   {
+    var location = new google.maps.LatLng(lat, lng);
+     var request = 
+     {
+      location: location,
+      query: ['beach','beaches'],
+      radius: 2000,
+      type: [ "tourist_attraction", "point_of_interest"]
+     };
+   
+     service = new google.maps.places.PlacesService(map);
+     service.textSearch(request, callback);
+   }
+   function callback(results, status)
+   {
+     if (status == google.maps.places.PlacesServiceStatus.OK) {
+       for (var i = 0; i < results.length; i++) {
+         var place = results[i];
+         createMarker(results[i]);
+       }
+       map.setCenter(results[0].geometry.location);
+     }
+   }
+   function createMarker(place) {
+     if (!place.geometry || !place.geometry.location) return;
+     const marker = new google.maps.Marker({
+       map,
+       position: place.geometry.location,
+     });
+     google.maps.event.addListener(marker, 'click', function(evt) {
+         var mark = this;
+         geocoder.geocode({
+           location: evt.latLng
+         }, function(results, status) {
+          console.log(results);
+           if (status == "OK") {
+             infowindow.setContent(results[0].address_components[2].short_name+' Beach');
+             infowindow.open(map, mark);
+             var desc = " Beach name: " + results[0].address_components[2].short_name + ' Beach';
+                 description = " Address: " + results[0].formatted_address;
+                 
+             $('#info').html( description ); /// 
+             $('#info1').html( desc );
+            //results[0].geometry.location.toUrlValue(6)
+           }
+         });
+       });
+   }
+</script>
+<style type="text/css">
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+   /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+   #map, .map {
+   height: 100%;
+   }
+   /* Optional: Makes the sample page fill the window. */
+   html,
+   body {
+   height: 400px;
+   margin: 0;
+   padding: 0;
+   font-size: small;
+   color: rgb(193, 154, 107);
+   font-family: 'Montserrat', sans-serif;
+   }
+   #desc {
+    font-size: 13px;
+    font-weight: 200;
+   }
+   #description {
+   font-size: 13px;
+   font-weight: 200;
+   }
+   #infowindow-content .title {
+   font-weight: bold;
+   }
+   #infowindow-content {
+   display: none;
+   }
+   #map #infowindow-content {
+   display: inline;
+   }
+   .pac-card {
+   margin: 10px 10px 0 0;
+   border-radius: 2px 0 0 2px;
+   box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   outline: none;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+   background-color: #fff;
+   font-family: 'Montserrat', sans-serif;
+   }
+   #pac-container {
+   padding-bottom: 12px;
+   margin-right: 12px;
+   }
+   .pac-controls {
+   display: inline-block;
+   padding: 5px 11px;
+   }
+   .pac-controls label {
+    font-family: 'Montserrat', sans-serif;
+   font-size: 13px;
+   font-weight: 300;
+   }
+   #pac-input {
+   background-color: #fff;
+   font-family: 'Montserrat', sans-serif;
+   font-size: 15px;
+   font-weight: 300;
+   padding: 0 11px 0 13px;
+   text-overflow: ellipsis;
+   width: 400px;
+   margin: 0 auto;
+   }
+   #pac-input:focus {
+   border-color: #4d90fe;
+   }
+   #title {
+   color: #fff;
+   background-color: #4d90fe;
+   font-size: 25px;
+   font-weight: 500;
+   padding: 6px 12px;
+   }
+   #target {
+   width: 345px;
+   }
+</style>

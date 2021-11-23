@@ -53,21 +53,21 @@ Datasets that we are looking for are shown in the table below.
 ![](https://github.com/sinyeen/HappyCorals/blob/main/Images/sour2.JPG)
 
 ### Results from the data
-**Data visualization for Educational purposes in "The Statistics" block at the bottom of the "Coral101" page**
+:arrow_forward: **Data visualization for Educational purposes in "The Statistics" block at the bottom of the "Coral101" page**
 ![](https://github.com/sinyeen/HappyCorals/blob/main/Images/Capture.PNG)
 
-**Data visualization for Educational purposes in the "Coral Reef Zone Classifications" block at the "Coral101" page**
+:arrow_forward: **Data visualization for Educational purposes in the "Coral Reef Zone Classifications" block at the "Coral101" page**
 ![](https://github.com/sinyeen/HappyCorals/blob/main/Images/1.PNG)
 
-**Show a map with the virtual dive function in the "Let's Dive into the Reef" in the "Explore the Reefs" page**
+:arrow_forward: **Show a map with the virtual dive function in the "Let's Dive into the Reef" in the "Explore the Reefs" page**
 ![](https://github.com/sinyeen/HappyCorals/blob/main/Images/dive.PNG)
 
 ![](https://github.com/sinyeen/HappyCorals/blob/main/Images/divein.PNG)
 
-**Show nearby beaches based on the user's search in the "Find a beach around Australia" block on the "Beach clean-up" page**
+:arrow_forward: **Show nearby beaches based on the user's search in the "Find a beach around Australia" block on the "Beach clean-up" page**
 ![](https://github.com/sinyeen/HappyCorals/blob/main/Images/findbeach.PNG)
 
-**Show the marine debris collected by the user in the "Debris items distribution based on the clean-up" block**
+:arrow_forward: **Show the marine debris collected by the user in the "Debris items distribution based on the clean-up" block**
 ![](https://github.com/sinyeen/HappyCorals/blob/main/Images/realtime%20vis.PNG)
 
 
